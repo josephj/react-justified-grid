@@ -1,6 +1,6 @@
 {
-  "name": "react-google-photo-layout-example",
-  "homepage": "https://josephj.github.io/react-google-photo-layout",
+  "name": "react-justified-grid-example",
+  "homepage": "https://josephj.github.io/react-justified-grid",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,7 +9,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "react-google-photo-layout": "link:.."
+    "react-justified-grid": "link:.."
   },
   "scripts": {
     "start": "react-scripts start",

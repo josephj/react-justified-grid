@@ -1,10 +1,10 @@
 {
-  "name": "react-google-photo-layout",
-  "version": "1.0.0",
-  "description": "Rendering grid layout which keeps the ratio of all images, like the Google Photos.",
+  "name": "react-justified-grid",
+  "version": "0.0.1",
+  "description": "Rendering grid layout without cropping image",
   "author": "josephj",
   "license": "MIT",
-  "repository": "josephj/react-google-photo-layout",
+  "repository": "josephj/react-justified-grid",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -21,7 +21,10 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/lodash": "^4.14.117",
+    "lodash": "^4.17.11"
+  },
   "peerDependencies": {
     "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
@@ -36,6 +39,7 @@
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.1.4",
     "gh-pages": "^1.2.0",
+    "prettier": "^1.14.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts-ts": "^2.16.0",
@@ -47,6 +51,10 @@
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-typescript2": "^0.17.0",
     "rollup-plugin-url": "^1.4.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-config-standard": "^8.0.1",
+    "tslint-react": "^3.6.0",
     "typescript": "^2.8.3"
   },
   "files": [

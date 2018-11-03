@@ -1,17 +1,20 @@
-# react-google-photo-layout
-
-Maybe react-fit-image-grid
+# react-justified-grid
 
 > Rendering grid layout which keeps the ratio of all images, like the Google Photos.
 
-[![NPM](https://img.shields.io/npm/v/react-google-photo-layout.svg)](https://www.npmjs.com/package/react-google-photo-layout) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-justified-grid.svg)](https://www.npmjs.com/package/react-justified-grid)
 
 ## Install
 
+npm
 ```bash
-npm install --save react-google-photo-layout
+npm install --save react-justified-grid
 ```
 
+yarn
+```bash
+yarn add react-justified-grid
+```
 ## Usage
 
 Firstly, you need to provide an image list with dimension provided.
@@ -44,15 +47,15 @@ const imageList = [{
 
 ```jsx
 import React, {Component} from 'react'
-import GooglePhotoLayout from 'react-google-photo-layout'
+import JustifiedGrid from 'react-justified-grid'
 
 class ImageGallery extends Component {
   return (
-    <GooglePhotoLayout
-      imageList={imageList}
-      numRows={3}
+    <JustifiedGrid
+      images={images}
+      rows={3}
       maxRowHeight={64}
-      gutterWidth={1}/>
+      gutter={1}/>
   );
 }
 ```
@@ -60,30 +63,30 @@ class ImageGallery extends Component {
 ### Advanced
 
 ```jsx
-import React, {Component} from 'react'
-import GooglePhotoLayout from 'react-google-photo-layout'
+import React, {Component, Fragement} from 'react';
+import Link from 'react-router-dom';
+import JustifiedGrid from 'react-justified-grid';
 
 class ImageGallery extends Component {
   render () {
     return (
-      <GooglePhotoLayout imageList={imageList} numRows={3} maxRowHeight={64}>
-        {(imageListWithViewport, metaData) => {
-          const { totalHidden, totalUsed, totalUnused } = metaData;
+      <JustifiedGrid images={images} rows={3} maxRowHeight={64}>
+        {(processedImages, meta) => {
+          const { usedCount } = meta;
           return (
-            <React.Fragement>
-              {imageListWithViewport.map((viewportData, sourceData) => {
-                const { src, width, height, x, y } = viewportData;
-                const { linkUrl } = sourceData;
+            <Fragement>
+              {processedImages.map(image => {
+                const { src, width, height, left, top, originalData } = image;
                 return (
-                  <Link to={linkUrl}>
+                  <Link to={originalData.linkUrl}>
                     <img src={src} width={width} height={height} />
                   </Link>
                 );
               })}
-            </React.Fragment>
+            </Fragement>
           );
         }}
-      </GoolePhotoLayout>
+      </JustifiedGrid>
     )
   }
 }
