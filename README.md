@@ -4,6 +4,8 @@
 
 [![NPM](https://img.shields.io/npm/v/react-justified-grid.svg)](https://www.npmjs.com/package/react-justified-grid)
 
+[Demo](https://josephj.github.io/react-justified-grid/)
+
 ![Example](https://cdn-std.dprcdn.net/files/acc_139047/vUCfUy)
 
 ## Install
