@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { isEqual, isFunction, cloneDeep, debounce } from 'lodash';
 import {
+  Image,
   Props,
   State,
   DefaultProps,
@@ -14,7 +15,8 @@ class JustifiedGrid extends React.Component<Props, State> {
   public static defaultProps: DefaultProps = {
     gutter: 1,
     rows: 3,
-    maxRowHeight: 100
+    maxRowHeight: 100,
+    showIncompleteRow: false
   };
   constructor(props: Props) {
     super(props);
@@ -23,10 +25,10 @@ class JustifiedGrid extends React.Component<Props, State> {
       gridHeight: 0
     };
   }
-  debounceResizeHandler = ():void => {
+  debounceResizeHandler = (): void => {
     debounce(this.handleWindowResize, 300);
-  }
-  handleWindowResize = ():void => {
+  };
+  handleWindowResize = (): void => {
     this.sync();
   };
   componentDidMount() {
@@ -43,7 +45,7 @@ class JustifiedGrid extends React.Component<Props, State> {
     window.removeEventListener('resize', this.debounceResizeHandler);
   }
   process(): ProcessedImage[] {
-    const { gutter, images, rows, maxRowHeight } = this
+    const { gutter, images, rows, maxRowHeight, showIncompleteRow } = this
       .props as PropsWithDefaults;
     const rowWidth = this.wrapperEl ? this.wrapperEl.offsetWidth : 0;
     let imageList = cloneDeep(images);
@@ -55,8 +57,9 @@ class JustifiedGrid extends React.Component<Props, State> {
       let height: number = 0;
       let isFulfilled: boolean = false;
       let offset: number = 0;
+      let selectedImages: Image[] = [];
       imageList.some(() => {
-        const selectedImages = imageList.slice(0, offset + 1);
+        selectedImages = imageList.slice(0, offset + 1);
         height = getRowHeight(selectedImages, rowWidth, gutter);
         isFulfilled = height < maxRowHeight;
         if (!isFulfilled) {
@@ -76,6 +79,17 @@ class JustifiedGrid extends React.Component<Props, State> {
       });
 
       if (!isFulfilled) {
+        if (showIncompleteRow) {
+          processedImageList = updateProcessedImageList(
+            processedImageList,
+            selectedImages,
+            maxRowHeight,
+            currentHeight,
+            rowIndex,
+            gutter
+          );
+        }
+
         return processedImageList;
       }
 
@@ -94,7 +108,13 @@ class JustifiedGrid extends React.Component<Props, State> {
   }
   render() {
     const { images, gridHeight } = this.state;
-    const { images: originalImages, maxRowHeight, children, ...otherProps } = this.props;
+    const {
+      images: originalImages,
+      showIncompleteRow,
+      maxRowHeight,
+      children,
+      ...otherProps
+    } = this.props;
 
     if (isFunction(children)) {
       return (

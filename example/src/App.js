@@ -10,7 +10,12 @@ export default class App extends Component {
           width: '800px',
           position: 'relative'
         }}>
-        <JustifiedGrid images={mockData} rows={5} maxRowHeight={64} />
+        <JustifiedGrid
+          images={mockData}
+          rows={5}
+          maxRowHeight={64}
+          showIncompleteRow={true}
+        />
         <hr />
         <JustifiedGrid images={mockData} rows={2} maxRowHeight={128}>
           {processedImages => (

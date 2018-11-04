@@ -21,6 +21,7 @@ export interface Props {
   gutter?: number;
   rows?: number;
   maxRowHeight?: number;
+  showIncompleteRow?: boolean;
   children?: (imageList: ProcessedImage[]) => React.ReactNode;
 }
 
@@ -28,6 +29,7 @@ export interface DefaultProps {
   gutter: number;
   rows: number;
   maxRowHeight: number;
+  showIncompleteRow: boolean;
 }
 
 export interface State {
