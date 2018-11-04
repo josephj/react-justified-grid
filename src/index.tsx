@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { isFunction, cloneDeep, debounce } from 'lodash';
+import { isEqual, isFunction, cloneDeep, debounce } from 'lodash';
 import {
   Props,
   State,
@@ -34,8 +34,10 @@ class JustifiedGrid extends React.Component<Props, State> {
 
     window.addEventListener('resize', this.debounceResizeHandler);
   }
-  componentDidUpdate() {
-    this.sync();
+  componentDidUpdate(prevProps: Props) {
+    if (!isEqual(this.props.images, prevProps.images)) {
+      this.sync();
+    }
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.debounceResizeHandler);
