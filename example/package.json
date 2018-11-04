@@ -8,13 +8,21 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "^1.1.4",
-    "react-justified-grid": "link:.."
+    "react-justified-grid": "link:..",
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "start-storybook -p 3000 -c .storybook",
+    "build": "build-storybook -c .storybook -o build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^4.0.2",
+    "@storybook/addon-info": "^4.0.2",
+    "@storybook/addon-options": "^4.0.2",
+    "@storybook/react": "^4.0.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4"
   }
 }
