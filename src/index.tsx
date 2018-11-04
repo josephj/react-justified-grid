@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { isFunction, cloneDeep, debounce } from 'lodash';
+import { isEqual, isFunction, cloneDeep, debounce } from 'lodash';
 import {
   Props,
   State,
@@ -22,6 +22,25 @@ class JustifiedGrid extends React.Component<Props, State> {
       images: [],
       gridHeight: 0
     };
+  }
+  debounceResizeHandler = ():void => {
+    debounce(this.handleWindowResize, 300);
+  }
+  handleWindowResize = ():void => {
+    this.sync();
+  };
+  componentDidMount() {
+    this.sync();
+
+    window.addEventListener('resize', this.debounceResizeHandler);
+  }
+  componentDidUpdate(prevProps: Props) {
+    if (!isEqual(this.props.images, prevProps.images)) {
+      this.sync();
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.debounceResizeHandler);
   }
   process(): ProcessedImage[] {
     const { gutter, images, rows, maxRowHeight } = this
@@ -72,20 +91,6 @@ class JustifiedGrid extends React.Component<Props, State> {
     const gridHeight: number = lastImage.top + lastImage.height;
 
     this.setState({ images, gridHeight });
-  }
-  debounceResizeHandler = ():void => {
-    debounce(this.handleWindowResize, 300);
-  }
-  handleWindowResize = ():void => {
-    this.sync();
-  };
-  componentDidMount() {
-    this.sync();
-
-    window.addEventListener('resize', this.debounceResizeHandler);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.debounceResizeHandler);
   }
   render() {
     const { images, gridHeight } = this.state;
