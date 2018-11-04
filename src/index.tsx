@@ -23,6 +23,23 @@ class JustifiedGrid extends React.Component<Props, State> {
       gridHeight: 0
     };
   }
+  debounceResizeHandler = ():void => {
+    debounce(this.handleWindowResize, 300);
+  }
+  handleWindowResize = ():void => {
+    this.sync();
+  };
+  componentDidMount() {
+    this.sync();
+
+    window.addEventListener('resize', this.debounceResizeHandler);
+  }
+  componentDidUpdate() {
+    this.sync();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.debounceResizeHandler);
+  }
   process(): ProcessedImage[] {
     const { gutter, images, rows, maxRowHeight } = this
       .props as PropsWithDefaults;
@@ -72,20 +89,6 @@ class JustifiedGrid extends React.Component<Props, State> {
     const gridHeight: number = lastImage.top + lastImage.height;
 
     this.setState({ images, gridHeight });
-  }
-  debounceResizeHandler = ():void => {
-    debounce(this.handleWindowResize, 300);
-  }
-  handleWindowResize = ():void => {
-    this.sync();
-  };
-  componentDidMount() {
-    this.sync();
-
-    window.addEventListener('resize', this.debounceResizeHandler);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.debounceResizeHandler);
   }
   render() {
     const { images, gridHeight } = this.state;
