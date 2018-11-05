@@ -100,9 +100,14 @@ class JustifiedGrid extends React.Component<Props, State> {
   }
   sync() {
     const images: ProcessedImage[] = this.process();
+
+    if (!images.length) {
+      this.setState({images, gridHeight: 0});
+      return;
+    }
+
     const lastImage: ProcessedImage = images[images.length - 1];
     const gridHeight: number = lastImage.top + lastImage.height;
-
     this.setState({ images, gridHeight });
   }
   render() {
