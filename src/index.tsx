@@ -36,7 +36,7 @@ class JustifiedGrid extends React.Component<Props, State> {
     window.addEventListener('resize', this.debounceResizeHandler);
   }
   componentDidUpdate(prevProps: Props) {
-    if (!isEqual(this.props.images, prevProps.images)) {
+    if (!isEqual(this.props, prevProps)) {
       this.sync();
     }
   }
