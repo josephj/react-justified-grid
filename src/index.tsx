@@ -12,6 +12,7 @@ import { getRowHeight, updateProcessedImageList } from './utils';
 
 class JustifiedGrid extends React.Component<Props, State> {
   private wrapperEl: HTMLDivElement | null;
+  private debounceResizeHandler: any;
   public static defaultProps: DefaultProps = {
     gutter: 1,
     rows: 3,
@@ -24,10 +25,8 @@ class JustifiedGrid extends React.Component<Props, State> {
       images: [],
       gridHeight: 0
     };
+    this.debounceResizeHandler = debounce(this.handleWindowResize, 300);
   }
-  debounceResizeHandler = (): void => {
-    debounce(this.handleWindowResize, 300);
-  };
   handleWindowResize = (): void => {
     this.sync();
   };
