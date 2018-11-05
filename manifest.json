@@ -1,8 +1,0 @@
-{
-  "short_name": "react-google-photo-layout",
-  "name": "react-google-photo-layout",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
-}
