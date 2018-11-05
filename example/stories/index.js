@@ -15,6 +15,15 @@ storiesOf('JustifiedGrid', module)
       showIncompleteRow={true}
     />
   ))
+  .add('Empty state', () => (
+    <JustifiedGrid images={[]}>
+      {images => {
+        if (!images.length) {
+          return <div>Nothing</div>;
+        }
+      }}
+    </JustifiedGrid>
+  ))
   .add('Render prop', () => (
     <JustifiedGrid images={mockData}>
       {processedImages => (
@@ -24,7 +33,7 @@ storiesOf('JustifiedGrid', module)
             return (
               <a
                 key={i}
-                href="https://josephj.com"
+                href="http://josephj.com"
                 style={{
                   position: 'absolute',
                   left: left,
