@@ -44,7 +44,8 @@ export default {
           'isFunction',
           'cloneDeep',
           'debounce',
-          'reduce'
+          'reduce',
+          'assign'
         ]
       }
     })

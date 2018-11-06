@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { isEqual, isFunction, cloneDeep, debounce } from 'lodash';
+import { assign, isEqual, isFunction, cloneDeep, debounce } from 'lodash';
 import {
   Image,
   Props,
@@ -17,6 +17,7 @@ class JustifiedGrid extends React.Component<Props, State> {
     gutter: 1,
     rows: 3,
     maxRowHeight: 100,
+    style: {},
     showIncompleteRow: false
   };
   constructor(props: Props) {
@@ -113,6 +114,9 @@ class JustifiedGrid extends React.Component<Props, State> {
   render() {
     const { images, gridHeight } = this.state;
     const {
+      rows,
+      gutter,
+      style,
       images: originalImages,
       showIncompleteRow,
       maxRowHeight,
@@ -120,11 +124,13 @@ class JustifiedGrid extends React.Component<Props, State> {
       ...otherProps
     } = this.props;
 
+    const defaultStyle = { position: 'relative', height: `${gridHeight}px` };
+
     if (isFunction(children)) {
       return (
         <div
           ref={el => (this.wrapperEl = el)}
-          style={{ position: 'relative', height: gridHeight }}
+          style={assign(defaultStyle, style)}
           {...otherProps}>
           {children(images)}
         </div>
@@ -134,7 +140,7 @@ class JustifiedGrid extends React.Component<Props, State> {
     return (
       <div
         ref={el => (this.wrapperEl = el)}
-        style={{ position: 'relative', height: gridHeight }}
+        style={assign(defaultStyle, style)}
         {...otherProps}>
         {images.map((image: ProcessedImage, i) => {
           return (
