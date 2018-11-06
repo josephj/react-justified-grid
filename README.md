@@ -62,6 +62,8 @@ class MyImageGallery extends Component {
 
 ### Advanced
 
+You can use ✨ **render props** ✨ (a.k.a children as function) to customize according to your needs.
+
 ```jsx
 import React, {Component, Fragement} from 'react';
 import Link from 'react-router-dom';
@@ -71,8 +73,7 @@ class MyImageGallery extends Component {
   render () {
     return (
       <JustifiedGrid images={images} rows={3} maxRowHeight={64}>
-        {(processedImages, meta) => {
-          const { usedCount } = meta;
+        {processedImages => {
           return (
             <Fragement>
               {processedImages.map(image => {
