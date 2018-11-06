@@ -6,7 +6,7 @@
 
 Storybook - [https://josephj.github.io/react-justified-grid/](https://josephj.github.io/react-justified-grid/)
 
-![Example](https://cdn-std.dprcdn.net/files/acc_139047/vUCfUy)
+![Example](https://cdn-std.dprcdn.net/files/acc_139047/sqkEbI)
 
 ## Install
 
