@@ -1,7 +1,7 @@
-import ExampleComponent from './'
+import JustifiedGrid from './index';
 
-describe('ExampleComponent', () => {
+describe('JustifiedGrid', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
-  })
-})
+    expect(JustifiedGrid).toBeTruthy();
+  });
+});

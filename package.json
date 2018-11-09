@@ -13,8 +13,8 @@
     "npm": ">=5"
   },
   "scripts": {
-    "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
-    "test:watch": "react-scripts-ts test --env=jsdom",
+    "test": "cross-env CI=1 react-scripts-ts test --env=jsdom  --no-watchman  --setupFiles ./src/setupTests.js",
+    "test:watch": "react-scripts-ts test --env=jsdom  --no-watchman  --setupFiles ./src/setupTests.js",
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepare": "yarn run build",
@@ -32,12 +32,16 @@
   },
   "devDependencies": {
     "@svgr/rollup": "^2.4.1",
+    "@types/enzyme": "^3.1.15",
     "@types/jest": "^23.1.5",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.1.4",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-to-json": "^3.3.4",
     "gh-pages": "^1.2.0",
     "prettier": "^1.14.3",
     "react": "^16.4.1",
@@ -55,7 +59,7 @@
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-standard": "^8.0.1",
     "tslint-react": "^3.6.0",
-    "typescript": "^2.8.3"
+    "typescript": "^3.1.6"
   },
   "files": [
     "dist"
