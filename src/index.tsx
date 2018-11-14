@@ -45,9 +45,9 @@ class JustifiedGrid extends React.Component<Props, State> {
     window.removeEventListener('resize', this.debounceResizeHandler);
   }
   process(): ProcessedImage[] {
-    const { gutter, images, rows, maxRowHeight, showIncompleteRow } = this
+    const { gutter, images, rows, maxRowHeight, showIncompleteRow, width } = this
       .props as PropsWithDefaults;
-    const rowWidth = this.wrapperEl ? this.wrapperEl.offsetWidth : 0;
+    const rowWidth = !!width ? width : this.wrapperEl ? this.wrapperEl.offsetWidth : 0;
     let imageList = cloneDeep(images);
     let processedImageList: ProcessedImage[] = [];
     let rowIndex = 0;
@@ -103,7 +103,7 @@ class JustifiedGrid extends React.Component<Props, State> {
     const images: ProcessedImage[] = this.process();
 
     if (!images.length) {
-      this.setState({images, gridHeight: 0});
+      this.setState({ images, gridHeight: 0 });
       return;
     }
 
@@ -121,10 +121,12 @@ class JustifiedGrid extends React.Component<Props, State> {
       showIncompleteRow,
       maxRowHeight,
       children,
+      width,
       ...otherProps
     } = this.props;
 
-    const defaultStyle = { position: 'relative', height: `${gridHeight}px` };
+    let defaultStyle: any = { position: 'relative', height: `${gridHeight}px` };
+    if (width) defaultStyle.width = `${width}px`;
 
     if (isFunction(children)) {
       return (
