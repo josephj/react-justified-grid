@@ -61,7 +61,7 @@ class JustifiedGrid extends React.Component<Props, State> {
       imageList.some(() => {
         selectedImages = imageList.slice(0, offset + 1);
         height = getRowHeight(selectedImages, rowWidth, gutter);
-        isFulfilled = height < maxRowHeight;
+        isFulfilled = height <= maxRowHeight;
         if (!isFulfilled) {
           offset += 1;
           return false;

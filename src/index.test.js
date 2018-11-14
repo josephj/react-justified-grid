@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import JustifiedGrid from './index';
 
 describe('<JustifiedGrid/>', () => {
@@ -15,21 +15,11 @@ describe('<JustifiedGrid/>', () => {
     { src: 'http://foo.com/7.png', width: 600, height: 500 },
     { src: 'http://foo.com/8.png', width: 380, height: 380 },
     { src: 'http://foo.com/9.png', width: 200, height: 500 },
-    { src: 'http://foo.com/10.png', width: 720, height: 640 },
-    { src: 'http://foo.com/11.png', width: 640, height: 380 },
-    { src: 'http://foo.com/12.png', width: 320, height: 480 },
-    { src: 'http://foo.com/13.png', width: 500, height: 500 },
-    { src: 'http://foo.com/14.png', width: 1024, height: 768 },
-    { src: 'http://foo.com/15.png', width: 480, height: 640 },
-    { src: 'http://foo.com/16.png', width: 1000, height: 800 },
-    { src: 'http://foo.com/17.png', width: 600, height: 500 },
-    { src: 'http://foo.com/18.png', width: 380, height: 380 },
-    { src: 'http://foo.com/19.png', width: 200, height: 500 },
-    { src: 'http://foo.com/20.png', width: 720, height: 640 }
+    { src: 'http://foo.com/10.png', width: 720, height: 640 }
   ];
   const justifiedGrid = () => {
     if (!mountedJustifiedGrid) {
-      mountedJustifiedGrid = mount(<JustifiedGrid {...props} />);
+      mountedJustifiedGrid = shallow(<JustifiedGrid {...props} />);
     }
     return mountedJustifiedGrid;
   };
@@ -80,12 +70,34 @@ describe('<JustifiedGrid/>', () => {
     ).toBeFalsy();
   });
 
-  it("handles the children props while it's a function", () => {
-    props.images = [].concat(defaultImages);
-    props.width = 500;
-    props.children = images => {};
+  it("handles the children props while it's a function", done => {
+    const childrenMock = jest.fn();
+    props.images = [{ src: 'http://foo.com/1.jpg', width: 100, height: 100 }];
+    props.gutter = 0;
+    props.width = 100;
+    props.children = childrenMock;
     const spy = jest.spyOn(props, 'children');
     justifiedGrid();
     expect(spy).toHaveBeenCalled();
+    setTimeout(() => {
+      justifiedGrid().update();
+      expect(childrenMock).toHaveBeenCalledWith([
+        {
+          src: 'http://foo.com/1.jpg',
+          alt: undefined,
+          width: 100,
+          height: 100,
+          rowOffset: 0,
+          left: 0,
+          top: 0,
+          originalData: {
+            src: 'http://foo.com/1.jpg',
+            width: 100,
+            height: 100
+          }
+        }
+      ]);
+      done();
+    }, 500);
   });
 });
