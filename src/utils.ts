@@ -1,5 +1,5 @@
-import { reduce } from 'lodash';
-import { Image, ProcessedImage } from './interfaces';
+import { cloneDeep, reduce } from 'lodash';
+import { DefaultProps, Image, ProcessedImage } from './interfaces';
 
 export function getRowHeight(
   imageList: Image[],
@@ -15,6 +15,69 @@ export function getRowHeight(
 
   return realWidth / ratio;
 }
+
+/**
+ * Curate image list according to setting
+ */
+export const curateImageList = (
+  images: Image[],
+  width: number,
+  setting: DefaultProps
+): ProcessedImage[] => {
+  const { gutter, rows, maxRowHeight, showIncompleteRow } = setting;
+  const rowWidth = width;
+
+  let imageList = cloneDeep(images);
+  let processedImageList: ProcessedImage[] = [];
+  let rowIndex = 0;
+  let currentHeight: number = 0;
+
+  while (imageList.length > 0 && rows > rowIndex) {
+    let height: number = 0;
+    let isFulfilled: boolean = false;
+    let offset: number = 0;
+    let selectedImages: Image[] = [];
+    imageList.some(() => {
+      selectedImages = imageList.slice(0, offset + 1);
+      height = getRowHeight(selectedImages, rowWidth, gutter);
+      isFulfilled = height <= maxRowHeight;
+      if (!isFulfilled) {
+        offset += 1;
+        return false;
+      }
+      processedImageList = updateProcessedImageList(
+        processedImageList,
+        selectedImages,
+        height,
+        currentHeight,
+        rowIndex,
+        gutter
+      );
+      currentHeight += height + gutter;
+      return true;
+    });
+
+    if (!isFulfilled) {
+      if (showIncompleteRow) {
+        processedImageList = updateProcessedImageList(
+          processedImageList,
+          selectedImages,
+          maxRowHeight,
+          currentHeight,
+          rowIndex,
+          gutter
+        );
+      }
+
+      return processedImageList;
+    }
+
+    imageList = cloneDeep(images).slice(processedImageList.length);
+    rowIndex += 1;
+  }
+
+  return processedImageList;
+};
 
 export function updateProcessedImageList(
   processImageList: ProcessedImage[],
