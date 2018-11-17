@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { assign, isEqual, isFunction, cloneDeep, debounce } from 'lodash';
+import { assign, isEqual, isFunction, debounce } from 'lodash';
 import {
-  Image,
   Props,
   State,
   DefaultProps,
   ProcessedImage,
   PropsWithDefaults
 } from './interfaces';
-import { getRowHeight, updateProcessedImageList } from './utils';
+import { curateImageList } from './utils';
 
 class JustifiedGrid extends React.Component<Props, State> {
   private wrapperEl: HTMLDivElement | null;
@@ -45,59 +44,24 @@ class JustifiedGrid extends React.Component<Props, State> {
     window.removeEventListener('resize', this.debounceResizeHandler);
   }
   process(): ProcessedImage[] {
-    const { gutter, images, rows, maxRowHeight, showIncompleteRow, width } = this
-      .props as PropsWithDefaults;
-    const rowWidth = !!width ? width : this.wrapperEl ? this.wrapperEl.offsetWidth : 0;
-    let imageList = cloneDeep(images);
-    let processedImageList: ProcessedImage[] = [];
-    let rowIndex = 0;
-    let currentHeight: number = 0;
-
-    while (imageList.length > 0 && rows > rowIndex) {
-      let height: number = 0;
-      let isFulfilled: boolean = false;
-      let offset: number = 0;
-      let selectedImages: Image[] = [];
-      imageList.some(() => {
-        selectedImages = imageList.slice(0, offset + 1);
-        height = getRowHeight(selectedImages, rowWidth, gutter);
-        isFulfilled = height <= maxRowHeight;
-        if (!isFulfilled) {
-          offset += 1;
-          return false;
-        }
-        processedImageList = updateProcessedImageList(
-          processedImageList,
-          selectedImages,
-          height,
-          currentHeight,
-          rowIndex,
-          gutter
-        );
-        currentHeight += height + gutter;
-        return true;
-      });
-
-      if (!isFulfilled) {
-        if (showIncompleteRow) {
-          processedImageList = updateProcessedImageList(
-            processedImageList,
-            selectedImages,
-            maxRowHeight,
-            currentHeight,
-            rowIndex,
-            gutter
-          );
-        }
-
-        return processedImageList;
-      }
-
-      imageList = cloneDeep(images).slice(processedImageList.length);
-      rowIndex += 1;
-    }
-
-    return processedImageList;
+    const {
+      gutter,
+      images,
+      rows,
+      maxRowHeight,
+      showIncompleteRow,
+      width,
+      style
+    } = this.props as PropsWithDefaults;
+    const wrapperWidth = (this.wrapperEl) ? this.wrapperEl.offsetWidth : 0;
+    const rowWidth = width || wrapperWidth;
+    return curateImageList(images, rowWidth, {
+      gutter,
+      rows,
+      maxRowHeight,
+      showIncompleteRow,
+      style
+    });
   }
   sync() {
     const images: ProcessedImage[] = this.process();
