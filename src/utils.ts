@@ -2,13 +2,12 @@ import { cloneDeep, reduce } from 'lodash';
 import { DefaultProps, Image, ProcessedImage } from './interfaces';
 
 export function getRowHeight(
-  imageList: Image[],
-  rowWidth: number,
-  gutterWidth: number
+  images: Image[],
+  width: number,
+  gutter: number
 ): number {
-  const realWidth: number =
-    rowWidth - imageList.length * gutterWidth + gutterWidth;
-  const ratio: number = imageList.reduce((sum: number, image: Image) => {
+  const realWidth: number = width - images.length * gutter + gutter;
+  const ratio: number = images.reduce((sum: number, image: Image) => {
     sum += image.width / image.height;
     return sum;
   }, 0);
