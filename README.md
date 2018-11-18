@@ -1,10 +1,10 @@
 # react-justified-grid
 
-> Grid layout which keeps proportion of all images. 
+> Grid layout which keeps proportion of all images.
 
-This library helps you to make layout like Google Photos easily. 
+This library helps you to make layout like Google Photos easily.
 
-[![NPM](https://img.shields.io/npm/v/react-justified-grid.svg)](https://www.npmjs.com/package/react-justified-grid)
+[![NPM](https://img.shields.io/npm/v/react-justified-grid.svg)](https://www.npmjs.com/package/react-justified-grid) [![Greenkeeper badge](https://badges.greenkeeper.io/josephj/react-justified-grid.svg)](https://greenkeeper.io/)
 
 Storybook - [https://josephj.github.io/react-justified-grid/](https://josephj.github.io/react-justified-grid/)
 
