@@ -5,6 +5,7 @@
 This library helps you to make layout like Google Photos easily. 
 
 [![NPM](https://img.shields.io/npm/v/react-justified-grid.svg)](https://www.npmjs.com/package/react-justified-grid)
+[![Travis](https://travis-ci.org/josephj/react-justified-grid.svg?branch=master)](https://travis-ci.org/josephj/react-justified-grid.svg?branch=master)
 
 Storybook - [https://josephj.github.io/react-justified-grid/](https://josephj.github.io/react-justified-grid/)
 
