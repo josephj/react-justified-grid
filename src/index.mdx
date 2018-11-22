@@ -1,0 +1,28 @@
+---
+name: Props
+route: /
+---
+
+import JustifiedGrid from './index.tsx';
+import mockData from '../example/src/mockData';
+import { Playground, PropsTable } from 'docz'
+
+# Props
+
+<PropsTable of={JustifiedGrid} />
+
+## Basic Usage
+
+<JustifiedGrid
+  images={mockData}
+  maxRowHeight={64}
+  rows={5}
+  showIncompleteRow={true}
+/>
+
+    <JustifiedGrid
+      images={mockData}
+      maxRowHeight={64}
+      rows={5}
+      showIncompleteRow={true}
+    />
