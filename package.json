@@ -1,6 +1,6 @@
 {
   "name": "react-justified-grid",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Rendering grid layout without cropping image",
   "author": "josephj",
   "license": "MIT",
