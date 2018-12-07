@@ -134,4 +134,6 @@ class JustifiedGrid extends React.Component<Props, State> {
   }
 }
 
+export { curateImageList };
+
 export default JustifiedGrid;
