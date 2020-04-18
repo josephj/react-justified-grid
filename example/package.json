@@ -5,11 +5,10 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-justified-grid": "link:..",
-    "react-scripts": "^1.1.4"
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-justified-grid": "link:.."
   },
   "scripts": {
     "start": "start-storybook -p 3000 -c .storybook",
@@ -18,10 +17,11 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^4.0.2",
-    "@storybook/addon-info": "^4.0.2",
-    "@storybook/addon-options": "^4.0.2",
-    "@storybook/react": "^4.0.2",
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-info": "^5.3.18",
+    "@storybook/addon-options": "^5.3.18",
+    "@storybook/preset-create-react-app": "^2.1.1",
+    "@storybook/react": "^5.3.18",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.4"
   }
