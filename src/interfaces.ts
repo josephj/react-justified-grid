@@ -19,7 +19,7 @@ export interface ProcessedImage {
 export interface Props {
   images: Image[];
   gutter?: number;
-  rows?: number;
+  rows?: number | undefined;
   maxRowHeight?: number;
   width?: number;
   style?: any;
@@ -29,7 +29,7 @@ export interface Props {
 
 export interface DefaultProps {
   gutter: number;
-  rows: number;
+  rows: number | undefined;
   maxRowHeight: number;
   style: any;
   showIncompleteRow: boolean;

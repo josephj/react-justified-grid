@@ -15,7 +15,7 @@ class JustifiedGrid extends React.Component<Props, State> {
   static readonly displayName = 'JustifiedGrid';
   public static defaultProps: DefaultProps = {
     gutter: 1,
-    rows: 3,
+    rows: undefined,
     maxRowHeight: 100,
     style: {},
     showIncompleteRow: false

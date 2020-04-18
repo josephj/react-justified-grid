@@ -31,7 +31,7 @@ export const curateImageList = (
   let rowIndex = 0;
   let currentHeight: number = 0;
 
-  while (imageList.length > 0 && rows > rowIndex) {
+  while (imageList.length > 0 && (rows === undefined || rows > rowIndex)) {
     let height: number = 0;
     let isFulfilled: boolean = false;
     let offset: number = 0;
